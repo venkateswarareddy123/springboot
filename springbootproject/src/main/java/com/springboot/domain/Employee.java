@@ -22,11 +22,11 @@ import lombok.NonNull;
 
 @Entity
 @Table(name = "EMPLOYEE")
-@Data
 public class Employee implements Serializable {
 
+	private static final long serialVersionUID=1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@NonNull
 	@Column(name = "PK_EMP_ID")
 	private Integer empId;
@@ -40,5 +40,31 @@ public class Employee implements Serializable {
 	@JsonIgnore
 	@JoinColumn(name = "FK_EMP_ID")
 	private List<Address> address;
+	public Integer getEmpId() {
+		return empId;
+	}
+	public void setEmpId(Integer empId) {
+		this.empId = empId;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public List<Address> getAddress() {
+		return address;
+	}
+	public void setAddress(List<Address> address) {
+		this.address = address;
+	}
+	
+	
 
 }
