@@ -2,12 +2,14 @@ package com.springboot.dto;
 
 import java.util.List;
 
+import com.googlecode.jmapper.annotations.JMap;
+
 
 public class EmployeeDto {
 
-	private Integer empId;
-	private String firstName;
-	private String lastName;
+	private @JMap Integer empId;
+	private @JMap String firstName;
+	private @JMap String lastName;
 	private List<AddressDto> address;
 	public Integer getEmpId() {
 		return empId;

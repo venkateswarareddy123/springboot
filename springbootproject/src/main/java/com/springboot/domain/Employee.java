@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.googlecode.jmapper.annotations.JMap;
 
 import lombok.Data;
 import lombok.NonNull;
@@ -29,13 +30,13 @@ public class Employee implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@NonNull
 	@Column(name = "PK_EMP_ID")
-	private Integer empId;
+	private @JMap Integer empId;
 	@Column(name = "FIRST_NAME")
 	@NonNull
-	private String firstName;
+	private @JMap String firstName;
 	@Column(name = "LAST_NAME")
 	@NonNull
-	private String lastName;
+	private @JMap String lastName;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
 	@JoinColumn(name = "FK_EMP_ID")

@@ -11,27 +11,56 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.googlecode.jmapper.annotations.JMap;
 
-import lombok.Data;
 
 @Entity
 @Table(name = "ADDRESS")
-@Data
 public class Address {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "PK_ADDRESS_ID")
-	private Integer addressId;
+	private @JMap Integer addressId;
 	@Column(name = "CITY")
-	private String city;
+	private @JMap String city;
 	@Column(name = "PINCODE")
-	private Long pincode;
+	private @JMap Integer pincode;
 	@Column(name = "PHONE_NUMBER")
-	private Long phoneNumber;
+	private @JMap Long phoneNumber;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "FK_EMP_ID", referencedColumnName = "PK_EMP_ID")
 	@JsonIgnore
 	private Employee empId;
+	public Integer getAddressId() {
+		return addressId;
+	}
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public Integer getPincode() {
+		return pincode;
+	}
+	public void setPincode(Integer pincode) {
+		this.pincode = pincode;
+	}
+	public Long getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(Long phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public Employee getEmpId() {
+		return empId;
+	}
+	public void setEmpId(Employee empId) {
+		this.empId = empId;
+	}
 
 }
