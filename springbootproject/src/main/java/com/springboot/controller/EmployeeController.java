@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,17 +33,24 @@ public class EmployeeController {
 	  return new ResponseEntity(response,HttpStatus.OK); 
 	  }
 	@PostMapping(produces="application/json",consumes="application/json")
-	public @ResponseBody ResponseEntity<ResponseData<String>> createEmployee(@RequestBody EmployeeDto employeeDto) {
+	public @ResponseBody ResponseEntity<ResponseData<String>> createOrUpdateEmployee(@RequestBody EmployeeDto employeeDto) {
 		ResponseData<String> response=new ResponseData<>();
 		response.setBody(employeeService.createEmployee(employeeDto));
 	  return new ResponseEntity(response,HttpStatus.OK); 
 	  }
 	
-	@GetMapping(value="/{pincode}")
+	@GetMapping(value="/pincode/{pincode}")
 	public @ResponseBody ResponseEntity<ResponseData<List<EmployeeDto>>> getEmployeesByPincode(
 			@PathVariable ("pincode") Integer pincode) {
 		ResponseData<List<EmployeeDto>> response=new ResponseData<>();
 		response.setBody(employeeService.getEmployeesByPincode(pincode));
+	  return new ResponseEntity(response,HttpStatus.OK); 
+	  }
+	@GetMapping(value="/city/{city}")
+	public @ResponseBody ResponseEntity<ResponseData<List<EmployeeDto>>> getEmployeesByCity(
+			@PathVariable ("city") Integer city) {
+		ResponseData<List<EmployeeDto>> response=new ResponseData<>();
+		response.setBody(employeeService.getEmployeesByCity(city));
 	  return new ResponseEntity(response,HttpStatus.OK); 
 	  }
 	
@@ -50,7 +58,8 @@ public class EmployeeController {
 	public @ResponseBody ResponseEntity<ResponseData<String>> deleteEmployee(
 			@PathVariable ("id") Integer id) throws CustomException{
 		ResponseData<String> response=new ResponseData<>();
-		//response.setBody(employeeService.deleteEmployee(id));
+		response.setBody(employeeService.deleteEmployee(id));
 	  return new ResponseEntity(response,HttpStatus.OK); 
 	  }
+	
 }

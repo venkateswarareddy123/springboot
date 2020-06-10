@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.googlecode.jmapper.JMapper;
@@ -18,7 +20,8 @@ public class EmployeeService {
 
 	@Autowired
 	private EmployeeRepository repository;
-
+	
+	@Cacheable(value="employee")
 	public List<EmployeeDto> getAllEmployees() {
 
 		List<EmployeeDto> dtoList = new ArrayList<>();
@@ -45,7 +48,7 @@ public class EmployeeService {
 			dtoList.add(dto);
 		});
 	}
-
+	
 	public String createEmployee(EmployeeDto employeeDto) {
 
 		Employee emp = new Employee();
@@ -69,6 +72,23 @@ public class EmployeeService {
 		List<EmployeeDto> employDtoList = new ArrayList<>();
 
 		List<Employee> employList = repository.findEmployeeByPincode(pincode);
+		if(employList != null && !employList.isEmpty()) {
+			convertObjectToDto(employDtoList, employList);	
+		}
+		return employDtoList;
+	}
+	@CacheEvict(value="employee",allEntries = true,key = "#id")
+	public String deleteEmployee(Integer id) {
+
+		repository.deleteEmployee(id);
+		
+		return "Employee Successfully Deleted";
+	}
+
+	public List<EmployeeDto> getEmployeesByCity(Integer city) {
+		List<EmployeeDto> employDtoList = new ArrayList<>();
+
+		List<Employee> employList = repository.findEmployeeByCity(city);
 		if(employList != null && !employList.isEmpty()) {
 			convertObjectToDto(employDtoList, employList);	
 		}
