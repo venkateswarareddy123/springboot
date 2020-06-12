@@ -4,37 +4,26 @@ import java.util.List;
 
 import com.googlecode.jmapper.annotations.JMap;
 
+import lombok.Data;
 
+@Data
 public class EmployeeDto {
 
 	private @JMap Integer empId;
 	private @JMap String firstName;
 	private @JMap String lastName;
 	private List<AddressDto> address;
-	public Integer getEmpId() {
-		return empId;
+	
+	public EmployeeDto() {
+		
 	}
-	public void setEmpId(Integer empId) {
+	public EmployeeDto(Integer empId, String firstName, String lastName) {
+		super();
 		this.empId = empId;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public List<AddressDto> getAddress() {
-		return address;
-	}
-	public void setAddress(List<AddressDto> address) {
-		this.address = address;
-	}
+	
 
 	
 }

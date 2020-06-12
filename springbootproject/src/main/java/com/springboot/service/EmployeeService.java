@@ -11,7 +11,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -96,7 +95,7 @@ public class EmployeeService {
 		return "Employee Successfully Deleted";
 	}
 
-	public List<EmployeeDto> getEmployeesByCity(Integer city) {
+	public List<EmployeeDto> getEmployeesByCity(String city) {
 		List<EmployeeDto> employDtoList = new ArrayList<>();
 
 		List<Employee> employList = repository.findEmployeeByCity(city);

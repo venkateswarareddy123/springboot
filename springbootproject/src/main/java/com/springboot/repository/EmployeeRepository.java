@@ -19,7 +19,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     public List<Employee> findEmployeeByPincode(@Param("pincode") Integer pincode);
 	
 	@Query(value= "SELECT emp FROM Employee emp join emp.address a WHERE a.city =:city")
-    public List<Employee> findEmployeeByCity(@Param("city") Integer city);
+    public List<Employee> findEmployeeByCity(@Param("city") String city);
 
 	@Modifying
 	@Query(value= "DELETE Employee emp WHERE emp.empId =:id")

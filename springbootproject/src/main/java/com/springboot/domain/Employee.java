@@ -17,12 +17,15 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.googlecode.jmapper.annotations.JMap;
+import com.springboot.dto.AddressDto;
+import com.springboot.dto.EmployeeDto;
 
 import lombok.Data;
 import lombok.NonNull;
 
 @Entity
 @Table(name = "EMPLOYEE")
+@Data
 public class Employee implements Serializable {
 
 	private static final long serialVersionUID=1L;
@@ -41,31 +44,8 @@ public class Employee implements Serializable {
 	@JsonIgnore
 	@JoinColumn(name = "FK_EMP_ID")
 	private List<Address> address;
-	public Integer getEmpId() {
-		return empId;
+	public Employee() {
 	}
-	public void setEmpId(Integer empId) {
-		this.empId = empId;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public List<Address> getAddress() {
-		return address;
-	}
-	public void setAddress(List<Address> address) {
-		this.address = address;
-	}
-	
-	
+		
 
 }

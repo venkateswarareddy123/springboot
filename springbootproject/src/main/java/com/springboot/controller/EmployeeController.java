@@ -37,7 +37,7 @@ public class EmployeeController {
 		response.setBody(employeeService.getAllEmployees());
 		return new ResponseEntity(response, HttpStatus.OK);
 	}
-
+	 
 	@PostMapping(produces = "application/json", consumes = "application/json")
 	public @ResponseBody ResponseEntity<ResponseData<String>> createEmployee(
 			@RequestBody EmployeeDto employeeDto) {
@@ -63,15 +63,14 @@ public class EmployeeController {
 
 	@GetMapping(value = "/city/{city}")
 	public @ResponseBody ResponseEntity<ResponseData<List<EmployeeDto>>> getEmployeesByCity(
-			@PathVariable("city") Integer city) {
+			@PathVariable("city") String city) {
 		ResponseData<List<EmployeeDto>> response = new ResponseData<>();
 		response.setBody(employeeService.getEmployeesByCity(city));
 		return new ResponseEntity(response, HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public @ResponseBody ResponseEntity<ResponseData<String>> deleteEmployee(@PathVariable("id") Integer id)
-			throws CustomException {
+	public @ResponseBody ResponseEntity<ResponseData<String>> deleteEmployee(@PathVariable("id") Integer id) {
 		ResponseData<String> response = new ResponseData<>();
 		response.setBody(employeeService.deleteEmployee(id));
 		return new ResponseEntity(response, HttpStatus.OK);
