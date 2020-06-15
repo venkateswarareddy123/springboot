@@ -7,6 +7,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.springframework.mock.web.MockMultipartFile;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -90,7 +93,17 @@ class EmployeeControllerTest {
 			when(empService.deleteEmployee(anyInt())).thenReturn(message);
 			assertEquals(message, empcontroller.deleteEmployee(1999990).getBody().getBody());
 		}
-		 
+		
+	@Test
+	public void saveEmployeesDataTest() throws com.springboot.utill.CustomException{
+		 String message ="Bulk Employees created successfully";	
+
+		MockMultipartFile multipartFile = new MockMultipartFile("file", "emp.xlsx",
+			      "text/plain", "sachin,sachin".getBytes());
+		
+		when(empService.saveBulkEmployees(multipartFile)).thenReturn(message);
+		assertEquals(message, empcontroller.saveBulkEmployees(multipartFile).getBody().getBody());
+	}
 	
 }
 	
