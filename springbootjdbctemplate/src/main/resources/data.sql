@@ -1,0 +1,1 @@
+INSERT into EMPLOYEE values(1,'Sachin','Tendulkar');
