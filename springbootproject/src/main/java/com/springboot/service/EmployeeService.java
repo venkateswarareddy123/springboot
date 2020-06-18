@@ -9,6 +9,7 @@ import java.util.concurrent.CompletableFuture;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -43,13 +44,12 @@ public class EmployeeService {
 	}
 
 	private void convertObjectToDto(List<EmployeeDto> dtoList, List<Employee> employList) {
-		JMapper<EmployeeDto, Employee> jmapper = new JMapper<>(EmployeeDto.class, Employee.class);
-		JMapper<AddressDto, Address> addressMapper = new JMapper<>(AddressDto.class, Address.class);
+		ModelMapper modelMapper = new ModelMapper();
 		employList.forEach(e -> {
-			EmployeeDto dto = jmapper.getDestination(e);
+			EmployeeDto dto = modelMapper.map(e, EmployeeDto.class);
 			List<AddressDto> addressList = new ArrayList<>();
 			e.getAddress().forEach(ad -> {
-				AddressDto addDto = addressMapper.getDestination(ad);
+				AddressDto addDto = modelMapper.map(ad, AddressDto.class);
 				addDto.setEmpId(e.getEmpId());
 				addressList.add(addDto);
 				dto.setAddress(addressList);
