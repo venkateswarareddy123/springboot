@@ -48,10 +48,10 @@ class EmployeeControllerTest {
 
 	@Test
 	public void getAllEmployeesTest() {
-		when(empService.getAllEmployees())
+		when(empService.getAllEmployees(0))
 				.thenReturn(Stream.of(new EmployeeDto(101, "sehwag", "Sachin"), new EmployeeDto(102, "Rohith", "Kohli"))
 						.collect(Collectors.toList()));
-		assertEquals(2, empcontroller.getAllEmployees().getBody().getBody().size());
+		assertEquals(2, empcontroller.getAllEmployees(0).getBody().getBody().size());
 
 	}
 	@Test

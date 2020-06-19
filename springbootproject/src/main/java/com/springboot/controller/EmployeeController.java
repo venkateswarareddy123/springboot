@@ -32,9 +32,9 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 
 	@GetMapping
-	public @ResponseBody ResponseEntity<ResponseData<List<EmployeeDto>>> getAllEmployees() {
+	public @ResponseBody ResponseEntity<ResponseData<List<EmployeeDto>>> getAllEmployees(@RequestParam ("pageIndex") Integer pageIndex) {
 		ResponseData<List<EmployeeDto>> response = new ResponseData<>();
-		response.setBody(employeeService.getAllEmployees());
+		response.setBody(employeeService.getAllEmployees(pageIndex));
 		return new ResponseEntity(response, HttpStatus.OK);
 	}
 	 

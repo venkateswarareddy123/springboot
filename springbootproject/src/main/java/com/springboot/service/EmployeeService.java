@@ -13,6 +13,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,13 +37,15 @@ public class EmployeeService {
 	private EmployeeRepository repository;
 	
 	@Cacheable(value="employeeCache")
-	public List<EmployeeDto> getAllEmployees() {
+	public List<EmployeeDto> getAllEmployees(Integer pageIndex) {
 
 		List<EmployeeDto> dtoList = new ArrayList<>();
-
-		List<Employee> employList = repository.findAll();
+		Integer pageSize=10;
+		 //Pageable pageable = new PageReque(page, size);
+		 Pageable pageable = PageRequest.of(pageIndex, pageSize, Sort.by(Order.asc("empId")));
+		Page<Employee> employList = repository.findAll(pageable);
 		if(employList != null && !employList.isEmpty()) {
-		convertObjectToDto(dtoList, employList);
+		convertObjectToDto(dtoList, employList.getContent());
 		}
 		return dtoList;
 	}
