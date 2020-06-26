@@ -13,4 +13,4 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 tpd:
-  topic-name: Test1
+  topic-name: Topic1

@@ -16,8 +16,6 @@ public class Producer {
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
-    
-   
 
     public void sendMessage(String message) {
         logger.info(String.format("$$ -> Producing message --> %s", message));
