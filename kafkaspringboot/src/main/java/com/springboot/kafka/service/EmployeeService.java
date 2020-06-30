@@ -32,7 +32,7 @@ public class EmployeeService {
 		List<Employee> employList = repository.getAllEmployees();
 		
 		employList.parallelStream().forEach(emp->{
-		    	  this.producer.sendMessage(gson.toJson(emp));
+		    	  this.producer.sendMessage(String.valueOf(emp.getEmpId()), gson.toJson(emp));
 		});
 		return "Successfully Published";
 	}

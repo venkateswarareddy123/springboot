@@ -13,5 +13,5 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 tpd:
-  topic-one: Topic11
-  topic-two: Topic12
+  topic-one: Topic29
+  topic-two: Topic30

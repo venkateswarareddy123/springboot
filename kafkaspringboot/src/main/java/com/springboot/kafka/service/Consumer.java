@@ -45,7 +45,8 @@ public class Consumer {
 		bonusEmp.setSalary(salary);
 		bonusEmp.setRating(emp.getRating());
 		logger.info(String.format("$$ -> Producing Employee to topic2 --> %s", bonusEmp));
-		this.kafkaTemplate.send(topicTwo, gson.toJson(bonusEmp));
+		//this.kafkaTemplate.send(topicTwo, gson.toJson(bonusEmp));
+		this.kafkaTemplate.send(topicTwo, String.valueOf(bonusEmp.getEmpId()), gson.toJson(bonusEmp));
 	}
 
 	@KafkaListener(topics = "${tpd.topic-two}", groupId = "group-id")
