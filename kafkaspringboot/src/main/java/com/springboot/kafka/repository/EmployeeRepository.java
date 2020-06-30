@@ -26,5 +26,10 @@ public class EmployeeRepository {
 		  List<Employee> list = jdbcTemplate.query(env.getProperty("FETCH_ALL_EMPLOYEES"), rowMapper);		  
 		  return list;
 	 }
-
+	 public String createEmployee(Employee employee) {
+		  jdbcTemplate.update(env.getProperty("CREATE_EMPLOYEE"), employee.getEmpId(), employee.getEmpName(), employee.getDesignation(),
+				  employee.getJoblevel(),employee.getSalary(),employee.getRating());
+		return "Employee Created Succesfully";
+		  
+	 }
 }
