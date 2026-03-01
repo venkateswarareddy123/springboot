@@ -36,6 +36,7 @@ public class DepartmentController {
     @PostMapping(value="/publish")
     public @ResponseBody ResponseEntity<ResponseData<String>> publishAllEmployees() {
         ResponseData<String> response = new ResponseData<>();
+        //comment added
         response.setBody(employeeService.publishAllEmployees());
         return new ResponseEntity(response, HttpStatus.OK);
     }
